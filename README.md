@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=WT735CX4UMZ9U)
+
 # TheatrhythmIO
 
 Final Fantasy Theatrhythm arcade panel interface
