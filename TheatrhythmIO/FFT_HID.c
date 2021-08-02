@@ -486,12 +486,12 @@ static color_t color_fade(uint16_t button_state)
   if (button_state & (LB_BUTTON) || button_state & (RB_BUTTON))
   {
     fade = FADERATE;
-    color = CYAN;
+    color = BLACK;
   }
   else if (button_state)
   {
     fade = FADERATE;
-    color = YELLOW;
+    color = NOST_GREEN;
   }
 
   float brit = (fade) * 192 / FADERATE;
@@ -539,11 +539,13 @@ void update_lamp(uint16_t button_state)
   else
     /* REACTIVE MODE */
   {
+    
+    RGB_rfid_light(BLUE);
+    
 #ifdef REACTIVE_SIM
     digitalWrite(PIN_LB_LED, LOW);
     digitalWrite(PIN_RB_LED, LOW);
-    RGB_rfid_light(BLUE);
-    RGB_light(LIGHT_BLUE);
+    RGB_light(NOST_GREEN);
     return;
 #else
     if (button_state & LB_BUTTON) digitalWrite(PIN_LB_LED, LOW);
@@ -555,7 +557,6 @@ void update_lamp(uint16_t button_state)
     update_func = color_fade;
 #endif
 
-    RGB_rfid_light(BLUE);
   }
 
   /* UPDATE ACCORDINGLY */
