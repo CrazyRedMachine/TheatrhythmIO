@@ -16,10 +16,17 @@
 
 /* LIGHT OPTIONS */
 
-/* make reactive mode mimick the arcade cab (light blue joystick light, lit buttons... boring) */
-#define REACTIVE_SIM 1
+/* make reactive a bit more dynamic rather than keeping everything lit like the arcade cab */
+#define REACTIVE_FADE 1
 
-/* delay (in seconds) before fallback to idle light animation */
+/* rfid reader light color in reactive mode */
+#define RFID_COLOR         BLUE
+/* Joystick RGB color used when moving joysticks in reactive mode */
+#define REACTIVE_PRIMARY   NOST_GREEN
+/* Joystick RGB color used when pushing buttons in reactive mode */
+#define REACTIVE_SECONDARY BLACK
+
+/* delay (in seconds) before fallback to idle light animation (0 to disable idle animation) */
 #define IDLE_ANIMATION_DELAY 3
 /* button blink time for idle animation */
 #define BUTTON_BLINK_TIME 0.8

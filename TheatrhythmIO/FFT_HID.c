@@ -486,12 +486,12 @@ static color_t color_fade(uint16_t button_state)
   if (button_state & (LB_BUTTON) || button_state & (RB_BUTTON))
   {
     fade = FADERATE;
-    color = BLACK;
+    color = REACTIVE_SECONDARY;
   }
   else if (button_state)
   {
     fade = FADERATE;
-    color = NOST_GREEN;
+    color = REACTIVE_PRIMARY;
   }
 
   float brit = (fade) * 192 / FADERATE;
@@ -517,6 +517,7 @@ void update_lamp(uint16_t button_state)
   if (last_button_update != 0)
     startup = false;
 
+#if IDLE_ANIMATION_DELAY != 0
   if (startup || now - last_button_update >= IDLE_ANIMATION_DELAY * 1000)
   {
     update_func = color_rainbow;
@@ -536,16 +537,17 @@ void update_lamp(uint16_t button_state)
       idle_but_led_update_time = now;
     }
   }
-  else
+  else 
+#endif /* IDLE ANIMATION */
     /* REACTIVE MODE */
   {
     
-    RGB_rfid_light(BLUE);
+    RGB_rfid_light(RFID_COLOR);
     
-#ifdef REACTIVE_SIM
+#ifdef REACTIVE_FADE == 0
     digitalWrite(PIN_LB_LED, LOW);
     digitalWrite(PIN_RB_LED, LOW);
-    RGB_light(NOST_GREEN);
+    RGB_light(REACTIVE_PRIMARY);
     return;
 #else
     if (button_state & LB_BUTTON) digitalWrite(PIN_LB_LED, LOW);
