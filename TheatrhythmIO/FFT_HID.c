@@ -544,7 +544,7 @@ void update_lamp(uint16_t button_state)
     
     RGB_rfid_light(RFID_COLOR);
     
-#ifdef REACTIVE_FADE == 0
+#if REACTIVE_FADE == 0
     digitalWrite(PIN_LB_LED, LOW);
     digitalWrite(PIN_RB_LED, LOW);
     RGB_light(REACTIVE_PRIMARY);

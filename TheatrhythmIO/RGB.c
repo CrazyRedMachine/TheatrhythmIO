@@ -20,14 +20,19 @@ uint8_t g_global_brightness = 0;
 
 void RGB_update_hid_data(uint8_t *data)
 {
-  analogWrite(PIN_JOY_RGB_R, data[0]);
-  analogWrite(PIN_JOY_RGB_G, data[1]);
-  analogWrite(PIN_JOY_RGB_B, data[2]);
+  color_t hid_color;
+  hid_color.red = data[0];
+  hid_color.green = data[1];
+  hid_color.blue = data[2];
+  
+  RGB_light(hid_color);
 
-  analogWrite(PIN_RFID_RGB_R, data[3]);
-  analogWrite(PIN_RFID_RGB_G, data[4]);
-  analogWrite(PIN_RFID_RGB_B, data[5]);
+  hid_color.red = data[3];
+  hid_color.green = data[4];
+  hid_color.blue = data[5];
 
+  RGB_rfid_light(hid_color);
+  
   /* button leds */
   if (data[6])
   {
