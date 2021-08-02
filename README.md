@@ -2,7 +2,7 @@
 
 # TheatrhythmIO
 
-Final Fantasy Theatrhythm arcade panel interface
+Final Fantasy Theatrhythm arcade panel interface using Arduino Leonardo
 
 ## CAUTION
 
