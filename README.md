@@ -12,13 +12,23 @@ This panel contains an RFID reader with what appears to be an USB connection. Th
 
 ## Acknowledgments
 
-This firmware is basically a fork of my GrooveCoasterIO firmware.
+This firmware is basically a fork of my GrooveCoasterIO firmware, and thus it uses Arduino-LUFA as well.
 
 Thanks to progmem for his work on reversing the pokken controller for Nintendo Switch.
+
+FASTIO mode uses digitalWriteFast library by NicksonYap.
+
+Button debouncing is done with Bounce2 library by Thomas O Fredericks.
 
 ## Demo
 
 https://www.instagram.com/p/CSCh5MRosdg/
+
+## Pre-requisites (How to flash)
+
+- Install `Bounce2` from the Arduino IDE Library manager
+- Install `Arduino-LUFA boards` from the Arduino IDE board manager following the instructions from https://github.com/CrazyRedMachine/Arduino-LUFA
+- Select `Arduino Leonardo (LUFA)` as your board type and click upload
 
 ## Features
 
