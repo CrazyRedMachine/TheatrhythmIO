@@ -9,7 +9,6 @@
 #define CYAN        ((color_t) { 0x00, 0xFF, 0xFF })
 #define WHITE       ((color_t) { 0xFF, 0xFF, 0xFF })
 #define BLACK       ((color_t) { 0x00, 0x00, 0x00 })
-#define LIGHT_BLUE  ((color_t) { 0x00, 0x7F, 0xFF })
 #define NOST_GREEN  ((color_t) { 0x00, 0x7F, 0x23 })
 
 /* Includes: */
