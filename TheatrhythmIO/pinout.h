@@ -19,16 +19,16 @@
 /* make reactive a bit more dynamic rather than keeping everything lit like the arcade cab */
 #define REACTIVE_FADE 1
 
-/* rfid reader light color in reactive mode */
+/* rfid reader light color in reactive mode (see RGB.h for color definitions) */
 #define RFID_COLOR         BLUE
-/* Joystick RGB color used when moving joysticks in reactive mode */
+/* Joystick RGB color used when moving joysticks in reactive mode (see RGB.h for color definitions) */
 #define REACTIVE_PRIMARY   NOST_GREEN
-/* Joystick RGB color used when pushing buttons in reactive mode */
+/* Joystick RGB color used when pushing buttons in reactive mode (see RGB.h for color definitions) */
 #define REACTIVE_SECONDARY BLACK
 
 /* delay (in seconds) before fallback to idle light animation (0 to disable idle animation) */
 #define IDLE_ANIMATION_DELAY 3
-/* button blink time for idle animation */
+/* button blink time (in seconds) for idle animation */
 #define BUTTON_BLINK_TIME 0.8
 
 /* PINS ASSIGNEMENT */
