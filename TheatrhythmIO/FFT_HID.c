@@ -431,14 +431,12 @@ const uint8_t HSVpower[121] =
   215, 217, 219, 221, 223, 225, 227, 229, 232, 234, 236, 238, 240, 242, 244,
   246, 249, 251, 253, 255
 };
-#define NBSHADES 40
-#define WAVESPEED 32
 static color_t color_rainbow(uint16_t button_state)
 {
   /* button position in ordering */
   static unsigned long startTime = 0;
   uint16_t angle;
-  angle = ((((millis() - startTime) / (1000 / WAVESPEED))) % NBSHADES) * 360 / NBSHADES;
+  angle = ((((millis() - startTime) / (1000 / RAINBOW_WAVESPEED))) % RAINBOW_NBSHADES) * 360 / RAINBOW_NBSHADES;
   byte r, g, b;
   if (angle < 120) {
     r = HSVpower[120 - angle];
@@ -463,8 +461,6 @@ static color_t color_rainbow(uint16_t button_state)
 
   return res;
 }
-#undef NBSHADES
-#undef WAVESPEED
 
 static color_t color_fade(uint16_t button_state)
 {

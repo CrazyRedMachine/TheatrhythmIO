@@ -28,7 +28,10 @@
 /* delay (in seconds) before fallback to idle light animation (0 to disable idle animation) */
 #define IDLE_ANIMATION_DELAY 10
 /* button blink time (in seconds) for idle animation */
-#define BUTTON_BLINK_TIME 0.8
+#define BUTTON_BLINK_TIME 1
+/* rainbow animation parameters */
+#define RAINBOW_NBSHADES 100
+#define RAINBOW_WAVESPEED 10
 
 /* PINS ASSIGNEMENT */
 
