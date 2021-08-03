@@ -14,6 +14,8 @@ This panel contains an RFID reader with what appears to be an USB connection. Th
 
 This firmware is basically a fork of my GrooveCoasterIO firmware, and thus it uses Arduino-LUFA as well.
 
+Thanks to pikpop for testing and providing pinout.
+
 Thanks to progmem for his work on reversing the pokken controller for Nintendo Switch.
 
 FASTIO mode uses digitalWriteFast library by NicksonYap.
