@@ -466,13 +466,13 @@ static color_t color_rainbow(uint16_t button_state)
 #undef NBSHADES
 #undef WAVESPEED
 
-#define FADERATE 80
 static color_t color_fade(uint16_t button_state)
 {
   static byte fade_cooldown = 40;
   static uint16_t fade = 0;
   static color_t color = BLACK;
-
+  color_t bgcolor = REACTIVE_TERNARY;
+  
   if (fade > 0)
   {
     fade_cooldown--;
@@ -485,20 +485,20 @@ static color_t color_fade(uint16_t button_state)
 
   if (button_state & (LB_BUTTON) || button_state & (RB_BUTTON))
   {
-    fade = FADERATE;
+    fade = REACTIVE_FADERATE;
     color = REACTIVE_SECONDARY;
   }
   else if (button_state)
   {
-    fade = FADERATE;
+    fade = REACTIVE_FADERATE;
     color = REACTIVE_PRIMARY;
   }
 
-  float brit = (fade) * 192 / FADERATE;
-  color_t res = {color.red* ((float)brit / 256.), color.green* ((float)brit / 256.), color.blue * ((float)brit / 256.)};
+  float brit = fade * 255 / REACTIVE_FADERATE;
+  float amount = brit / 255.;
+  color_t res = {color.red* amount + bgcolor.red*(1-amount), color.green* amount + bgcolor.green*(1-amount), color.blue * amount + bgcolor.blue*(1-amount)};
   return res;
 }
-#undef FADERATE
 
 void update_lamp(uint16_t button_state)
 {
@@ -518,7 +518,7 @@ void update_lamp(uint16_t button_state)
     startup = false;
 
 #if IDLE_ANIMATION_DELAY != 0
-  if (startup || now - last_button_update >= IDLE_ANIMATION_DELAY * 1000)
+  if (startup || (!button_state) && (now - last_button_update >= IDLE_ANIMATION_DELAY * 1000))
   {
     update_func = color_rainbow;
     RGB_rfid_light(update_func(button_state));

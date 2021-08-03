@@ -19,7 +19,7 @@
 #include <avr/interrupt.h>
 #include <string.h>
 
-#include "pinout.h"
+#include "config.h"
 
 typedef struct color_s {
   uint8_t red;

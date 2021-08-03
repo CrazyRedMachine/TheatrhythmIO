@@ -14,7 +14,7 @@
 
 #include "Descriptors.h"
 #include "RGB.h"
-#include "pinout.h"
+#include "config.h"
 
 #include <LUFA/LUFA/Drivers/USB/USB.h>
 #include <LUFA/LUFA/Drivers/Board/Joystick.h>

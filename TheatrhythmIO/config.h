@@ -1,5 +1,5 @@
-#ifndef _PINOUT_H_
-#define _PINOUT_H_
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
 
 /* USER OPTIONS */
 
@@ -18,29 +18,34 @@
 
 /* make reactive a bit more dynamic rather than keeping everything lit like the arcade cab */
 #define REACTIVE_FADE 1
+/* fade out speed (higher is slower) */
+#define REACTIVE_FADERATE 60
 
+/* delay (in seconds) before fallback to idle light animation (0 to disable idle animation) */
+#define IDLE_ANIMATION_DELAY 10
+/* button blink time (in seconds) for idle animation */
+#define BUTTON_BLINK_TIME 0.8
+
+/* COLOR PALETTE */
 /* rfid reader light color in reactive mode (see RGB.h for color definitions) */
 #define RFID_COLOR         BLUE
 /* Joystick RGB color used when moving joysticks in reactive mode (see RGB.h for color definitions) */
 #define REACTIVE_PRIMARY   NOST_GREEN
 /* Joystick RGB color used when pushing buttons in reactive mode (see RGB.h for color definitions) */
 #define REACTIVE_SECONDARY BLACK
-
-/* delay (in seconds) before fallback to idle light animation (0 to disable idle animation) */
-#define IDLE_ANIMATION_DELAY 3
-/* button blink time (in seconds) for idle animation */
-#define BUTTON_BLINK_TIME 0.8
+/* Joystick RGB color used when nothing is pushed in reactive mode (see RGB.h for color definitions) */
+#define REACTIVE_TERNARY   BLACK
 
 /* PINS ASSIGNEMENT */
 
 /* RGB pins (/!\ MUST USE PWM PINS /!\) */
-#define PIN_JOY_RGB_R   9
-#define PIN_JOY_RGB_G   10
-#define PIN_JOY_RGB_B   11
+#define PIN_JOY_RGB_R    9
+#define PIN_JOY_RGB_G    10
+#define PIN_JOY_RGB_B    11
 
-#define PIN_RFID_RGB_R      5
-#define PIN_RFID_RGB_G      6
-#define PIN_RFID_RGB_B      13
+#define PIN_RFID_RGB_R   5
+#define PIN_RFID_RGB_G   6
+#define PIN_RFID_RGB_B   3
 
 /* Left joy pins */ /* switch : dpad lb */
 #define PIN_LB_UP        4  /* dpad up */
@@ -55,7 +60,7 @@
 #define PIN_RB_DOWN      A5  /* B */
 #define PIN_RB_LEFT      1  /* Y */
 #define PIN_RB_RIGHT     A4 /* A */
-#define PIN_RB_BUTTON    3 /* R bumper */
+#define PIN_RB_BUTTON    13 /* R bumper */
 #define PIN_RB_LED       2
 
 /* Additional button pins */

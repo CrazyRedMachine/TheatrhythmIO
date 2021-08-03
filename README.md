@@ -38,13 +38,49 @@ Additionally, a second interface will appear on PC for HID lights control.
 
 It is possible to make the panel send keyboard inputs in parallel to the gamepad although not recommended.
 
-`pinout.h` contains configurable user options.
+`config.h` contains configurable user options.
 
 ### Light modes
 
-The controller with automatically switch between HID and reactive modes upon HID message reception.
+The controller supports HID and two reactive modes.
 
-Also it will display a light animation when idling (the idle animation fallback delay can be configured in `pinout.h`).
+Also it will display a light animation when idling (the idle animation fallback delay can be configured in `config.h`).
+
+#### HID
+
+Controller will automatically switch to HID upon receiving hid messages (and will fallback to reactive mode after 3 seconds without communication).
+
+Joysticks RGB, RFID RGB and individual button leds can be controlled this way, and all outputs are named.
+
+**Note:** Joysticks RGB is for both sticks at once (the panel connectors don't expose individual joysticks)
+
+#### Arcade cab simulation
+
+With `REACTIVE_FADE` set to 0 in `config.h`, Joystick RGB and buttons will stay lit just like the original arcade cab.
+
+Joysticks RGB will remain lit with `REACTIVE_PRIMARY` color, RFID RGB will remain lit with `RFID_COLOR` color, and buttons will remain lit as well.
+
+`REACTIVE_PRIMARY` and `RFID_COLOR` are set by default to the same colors as the arcade cab.
+
+#### Reactive fade
+
+With `REACTIVE_FADE` set to 1 in `config.h`, the behavior is a bit more lively:
+
+|Component|Joysticks moved|Button pressed|Nothing pressed|
+|:---|---|---|---:|
+| RFID |`RFID_COLOR`|`RFID_COLOR`|`RFID_COLOR`|
+|Joysticks|`REACTIVE_PRIMARY`|`REACTIVE_SECONDARY`|`REACTIVE_TERNARY`|
+|Button|OFF|ON|OFF|
+
+There is a fade transition towards `REACTIVE_TERNARY` when releasing buttons.
+
+The color palette can be changed in `config.h`, for example
+
+`#define REACTIVE_TERNARY ((color_t) { 0xFF, 0xFF, 0x00 })`
+
+or `#define REACTIVE_TERNARY YELLOW` would work too here since some colors are defined in `RGB.h`
+
+#### Idle animation
 
 ## Pinout
 
@@ -64,7 +100,7 @@ RGB leds are common anode.
 |:---|---|---|---:|
 | 1 |Pink |RFID RGB Red - |5|
 |2|Brown |RFID RGB Green -|6|
-|3|Purple |RFID RGB Blue -|13|
+|3|Purple |RFID RGB Blue -|3|
 |4|White/Red |Joysticks RGB Red -|9|
 |5|White/Green |Joysticks RGB Green -|10|
 |6|White/Blue |Joysticks RGB Blue -|11|
@@ -123,7 +159,7 @@ This one takes care of the lonely forgotten input.
 
 |Pin number|Wire color|Role|Arduino GPIO|
 |:---|---|---|---:|
-| 1 |Blue| Right button |3|
+| 1 |Blue| Right button |13|
 
 ## Donation
 

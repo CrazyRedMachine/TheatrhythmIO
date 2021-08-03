@@ -1,4 +1,4 @@
-#include "pinout.h"
+#include "config.h"
 #include "LUFAConfig.h"
 #include <LUFA.h>
 #include "FFT_HID.h"

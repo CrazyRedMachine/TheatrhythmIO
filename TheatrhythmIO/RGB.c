@@ -54,19 +54,21 @@ void RGB_update_hid_data(uint8_t *data)
   return;
 }
 
+#define INVERT 255 -
 void RGB_light(color_t color)
 {
-  analogWrite(PIN_JOY_RGB_R, 255 - color.red);
-  analogWrite(PIN_JOY_RGB_G, 255 - color.green);
-  analogWrite(PIN_JOY_RGB_B, 255 - color.blue);
+  analogWrite(PIN_JOY_RGB_R, INVERT color.red);
+  analogWrite(PIN_JOY_RGB_G, INVERT color.green);
+  analogWrite(PIN_JOY_RGB_B, INVERT color.blue);
 }
 
 void RGB_rfid_light(color_t color)
 {
-  analogWrite(PIN_RFID_RGB_R, 255 - color.red);
-  analogWrite(PIN_RFID_RGB_G, 255 - color.green);
-  analogWrite(PIN_RFID_RGB_B, 255 - color.blue);
+  analogWrite(PIN_RFID_RGB_R, INVERT color.red);
+  analogWrite(PIN_RFID_RGB_G, INVERT color.green);
+  analogWrite(PIN_RFID_RGB_B, INVERT color.blue);
 }
+#undef INVERT
 
 void RGB_setup()
 {
