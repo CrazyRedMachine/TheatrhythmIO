@@ -67,12 +67,12 @@ Joysticks RGB will remain lit with `REACTIVE_PRIMARY` color, RFID RGB will remai
 With `REACTIVE_FADE` set to 1 in `config.h`, the behavior is a bit more lively:
 
 |Component|Joysticks moved|Button pressed|Nothing pressed|
-|:---|---|---|---:|
+|:---|---|---|---|
 | RFID |`RFID_COLOR`|`RFID_COLOR`|`RFID_COLOR`|
 |Joysticks|`REACTIVE_PRIMARY`|`REACTIVE_SECONDARY`|`REACTIVE_TERNARY`|
-|Button|OFF|ON|OFF|
+|Button|`OFF`|`ON`|`OFF`|
 
-There is a fade transition towards `REACTIVE_TERNARY` when releasing buttons.
+There is a fade transition towards `REACTIVE_TERNARY` when releasing buttons, whose speed can be adjusted with the `REACTIVE_FADERATE` option.
 
 The color palette can be changed in `config.h`, for example
 
@@ -81,6 +81,14 @@ The color palette can be changed in `config.h`, for example
 or `#define REACTIVE_TERNARY YELLOW` would work too here since some colors are defined in `RGB.h`
 
 #### Idle animation
+
+A rainbow wave idle animation (also used as startup animation) will be displayed before touching a button on the controller, or after not touching anything for a while (10 seconds by default).
+
+The delay can be configured in `config.h` :
+
+`#define IDLE_ANIMATION_DELAY 10`
+
+Setting this value to 0 will disable the idle animation
 
 ## Pinout
 
