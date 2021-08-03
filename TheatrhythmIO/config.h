@@ -3,20 +3,24 @@
 
 /* USER OPTIONS */
 
-/* in case you want to disable one type of gamepad */
-//#define DISABLE_NSWITCH
-#define DISABLE_XINPUT
+/* COLOR PALETTE */
 
-//make it so holding start+select triggers the HOME button
-//#define HOME_HOTKEY
-//delay in ms for start+select to become HOME in HOME_HOTKEY mode
-#define HOME_DELAY 1000
-
-#define MILLIDEBOUNCE 1 /* Debounce time in milliseconds */
+/* rfid reader light color in reactive mode (see RGB.h for color definitions) */
+#define RFID_COLOR         BLUE
+/* Joystick RGB color used when moving joysticks in reactive mode (see RGB.h for color definitions) */
+#define REACTIVE_PRIMARY   NOST_GREEN
+/* Joystick RGB color used when pushing buttons in reactive mode (see RGB.h for color definitions) */
+#define REACTIVE_SECONDARY YELLOW
+/* Joystick RGB color used when nothing is pushed in reactive mode (see RGB.h for color definitions) */
+#define REACTIVE_TERNARY   WHITE
 
 /* LIGHT OPTIONS */
 
-/* make reactive a bit more dynamic rather than keeping everything lit like the arcade cab */
+/* button leds behavior in reactive mode */
+#define BUTTON_LIGHT_RELEASED_STATE  OFF
+#define BUTTON_LIGHT_PRESSED_STATE  ON
+
+/* make reactive fade to ternary instead of an immediate transition */
 #define REACTIVE_FADE 1
 /* fade out speed (higher is slower) */
 #define REACTIVE_FADERATE 60
@@ -25,16 +29,6 @@
 #define IDLE_ANIMATION_DELAY 10
 /* button blink time (in seconds) for idle animation */
 #define BUTTON_BLINK_TIME 0.8
-
-/* COLOR PALETTE */
-/* rfid reader light color in reactive mode (see RGB.h for color definitions) */
-#define RFID_COLOR         BLUE
-/* Joystick RGB color used when moving joysticks in reactive mode (see RGB.h for color definitions) */
-#define REACTIVE_PRIMARY   NOST_GREEN
-/* Joystick RGB color used when pushing buttons in reactive mode (see RGB.h for color definitions) */
-#define REACTIVE_SECONDARY BLACK
-/* Joystick RGB color used when nothing is pushed in reactive mode (see RGB.h for color definitions) */
-#define REACTIVE_TERNARY   BLACK
 
 /* PINS ASSIGNEMENT */
 
@@ -98,6 +92,17 @@
 
 /* END OF USER CONFIGURABLE OPTIONS */
 
+/* in case you want to disable one type of gamepad */
+//#define DISABLE_NSWITCH
+#define DISABLE_XINPUT
+
+//make it so holding start+select triggers the HOME button
+//#define HOME_HOTKEY
+//delay in ms for start+select to become HOME in HOME_HOTKEY mode
+#define HOME_DELAY 1000
+
+#define MILLIDEBOUNCE 1 /* Debounce time in milliseconds */
+
 /* use faster digitalWrite to speedup light processing (25 times faster) */
 #define WITH_FASTIO
 
@@ -118,5 +123,8 @@ enum button_mask {
   SERVICE   = 1 << 11,
   COIN      = 1 << 12,
 };
+
+#define ON  LOW
+#define OFF HIGH
 
 #endif

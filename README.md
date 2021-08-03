@@ -46,7 +46,7 @@ The controller supports HID and two reactive modes.
 
 Also it will display a light animation when idling (the idle animation fallback delay can be configured in `config.h`).
 
-#### HID
+#### HID mode
 
 Controller will automatically switch to HID upon receiving hid messages (and will fallback to reactive mode after 3 seconds without communication).
 
@@ -54,25 +54,19 @@ Joysticks RGB, RFID RGB and individual button leds can be controlled this way, a
 
 **Note:** Joysticks RGB is for both sticks at once (the panel connectors don't expose individual joysticks)
 
-#### Arcade cab simulation
+#### Reactive mode
 
-With `REACTIVE_FADE` set to 0 in `config.h`, Joystick RGB and buttons will stay lit just like the original arcade cab.
-
-Joysticks RGB will remain lit with `REACTIVE_PRIMARY` color, RFID RGB will remain lit with `RFID_COLOR` color, and buttons will remain lit as well.
-
-`REACTIVE_PRIMARY` and `RFID_COLOR` are set by default to the same colors as the arcade cab.
-
-#### Reactive fade
-
-With `REACTIVE_FADE` set to 1 in `config.h`, the behavior is a bit more lively:
+When no HID messages are received, reactive lighting mode behaves according to 4 user-configurable colors as shown in the following color table :
 
 |Component|Joysticks moved|Button pressed|Nothing pressed|
 |:---|---|---|---|
 | RFID |`RFID_COLOR`|`RFID_COLOR`|`RFID_COLOR`|
 |Joysticks|`REACTIVE_PRIMARY`|`REACTIVE_SECONDARY`|`REACTIVE_TERNARY`|
-|Button|`OFF`|`ON`|`OFF`|
+|Button|`BUTTON_LIGHT_RELEASED_STATE`|`BUTTON_LIGHT_PRESSED_STATE`|`BUTTON_LIGHT_RELEASED_STATE`|
 
-There is a fade transition towards `REACTIVE_TERNARY` when releasing buttons, whose speed can be adjusted with the `REACTIVE_FADERATE` option.
+When `REACTIVE_FADE` is set to 1, there is a fade transition when releasing buttons instead of an immediate one.
+
+Transition speed can be adjusted with the `REACTIVE_FADERATE` option.
 
 The color palette can be changed in `config.h`, for example
 

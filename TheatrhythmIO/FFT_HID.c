@@ -500,6 +500,22 @@ static color_t color_fade(uint16_t button_state)
   return res;
 }
 
+static color_t color_static(uint16_t button_state)
+{
+  if (button_state & (LB_BUTTON) || button_state & (RB_BUTTON))
+  {
+    return REACTIVE_SECONDARY;
+  }
+  else if (button_state)
+  {
+    return REACTIVE_PRIMARY;
+  }
+  else
+  {
+    return REACTIVE_TERNARY;
+  }
+}
+
 void update_lamp(uint16_t button_state)
 {
   static bool startup = true;
@@ -542,20 +558,17 @@ void update_lamp(uint16_t button_state)
     /* REACTIVE MODE */
   {
     
+    if (button_state & LB_BUTTON) digitalWrite(PIN_LB_LED, BUTTON_LIGHT_PRESSED_STATE);
+    else digitalWrite(PIN_LB_LED, BUTTON_LIGHT_RELEASED_STATE);
+
+    if (button_state & RB_BUTTON) digitalWrite(PIN_RB_LED, BUTTON_LIGHT_PRESSED_STATE);
+    else digitalWrite(PIN_RB_LED, BUTTON_LIGHT_RELEASED_STATE);
+    
     RGB_rfid_light(RFID_COLOR);
     
 #if REACTIVE_FADE == 0
-    digitalWrite(PIN_LB_LED, LOW);
-    digitalWrite(PIN_RB_LED, LOW);
-    RGB_light(REACTIVE_PRIMARY);
-    return;
+    update_func = color_static;
 #else
-    if (button_state & LB_BUTTON) digitalWrite(PIN_LB_LED, LOW);
-    else digitalWrite(PIN_LB_LED, HIGH);
-
-    if (button_state & RB_BUTTON) digitalWrite(PIN_RB_LED, LOW);
-    else digitalWrite(PIN_RB_LED, HIGH);
-
     update_func = color_fade;
 #endif
 
