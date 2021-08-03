@@ -10,9 +10,9 @@
 /* Joystick RGB color used when moving joysticks in reactive mode (see RGB.h for color definitions) */
 #define REACTIVE_PRIMARY   NOST_GREEN
 /* Joystick RGB color used when pushing buttons in reactive mode (see RGB.h for color definitions) */
-#define REACTIVE_SECONDARY YELLOW
+#define REACTIVE_SECONDARY WHITE
 /* Joystick RGB color used when nothing is pushed in reactive mode (see RGB.h for color definitions) */
-#define REACTIVE_TERNARY   WHITE
+#define REACTIVE_TERNARY   BLACK
 
 /* LIGHT OPTIONS */
 
