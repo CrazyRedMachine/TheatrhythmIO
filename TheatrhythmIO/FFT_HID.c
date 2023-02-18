@@ -226,6 +226,7 @@ void generate_report_switch(uint16_t button_state) {
   ReportData.LY = 128;
   ReportData.RX = 128;
   ReportData.RY = 128;
+  ReportData.HAT = DPAD_NOTHING_MASK_ON;
 
 if (button_state & SERVICE)
 {
