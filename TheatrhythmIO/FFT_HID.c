@@ -227,6 +227,8 @@ void generate_report_switch(uint16_t button_state) {
   ReportData.RX = 128;
   ReportData.RY = 128;
 
+if (button_state & SERVICE)
+{
   // left booster
   if ((button_state & LB_UP) && (button_state & LB_RIGHT)) {
     ReportData.HAT = DPAD_UPRIGHT_MASK_ON;
@@ -256,10 +258,6 @@ void generate_report_switch(uint16_t button_state) {
     ReportData.HAT = DPAD_NOTHING_MASK_ON;
   }
 
-  if (button_state & LB_BUTTON) {
-    ReportData.Button |= LB_MASK_ON;
-  }
-
   // right booster
   if (button_state & RB_UP) {
     ReportData.Button |= X_MASK_ON;
@@ -273,18 +271,62 @@ void generate_report_switch(uint16_t button_state) {
   else if (button_state & RB_RIGHT) {
     ReportData.Button |= A_MASK_ON;
   }
+  
+  if (button_state & LB_BUTTON) {
+    ReportData.Button |= SELECT_MASK_ON;
+  }
 
+  if (button_state & RB_BUTTON) {
+    ReportData.Button |= START_MASK_ON;
+  }
+}
+else 
+{
+  // left booster
+  if (button_state & LB_UP) {
+    ReportData.LY = 0;  
+  }
+  else if (button_state & LB_DOWN) {
+    ReportData.LY = 255;
+  }
+  if (button_state & LB_LEFT) {
+    ReportData.LX = 0;  
+  }
+  else if (button_state & LB_RIGHT) {
+    ReportData.LX = 255;  
+  }
+
+  // right booster
+  if (button_state & RB_UP) {
+    ReportData.RY = 0;  
+  }
+  else if (button_state & RB_DOWN) {
+    ReportData.RY = 255;
+  }
+  if (button_state & RB_LEFT) {
+    ReportData.RX = 0;  
+  }
+  else if (button_state & RB_RIGHT) {
+    ReportData.RX = 255;  
+  }
+
+  if (button_state & LB_BUTTON) {
+    ReportData.Button |= LB_MASK_ON;
+  }
+  
   if (button_state & RB_BUTTON) {
     ReportData.Button |= RB_MASK_ON;
   }
+}
 
   // Buttons
   if (button_state & TEST) {
     ReportData.Button |= START_MASK_ON;
   }
-  if (button_state & SERVICE) {
+/*  if (button_state & SERVICE) {
     ReportData.Button |= HOME_MASK_ON;
   }
+  */
   if (button_state & COIN) {
     ReportData.Button |= SELECT_MASK_ON;
   }
