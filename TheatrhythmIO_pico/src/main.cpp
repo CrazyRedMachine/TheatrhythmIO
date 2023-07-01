@@ -136,12 +136,25 @@ void update_lights(){
 void update_lights_reactive() {
   if (REACTIVE_FALLBACK(g_hid_last))
   {
-    for (int i = 0; i < NUM_LIGHTS; i++) {
-      if ( (g_button_state >> (i))&1 ) 
-		  gpio_put(g_led_pin[i], true);
-	  else 
-		  gpio_put(g_led_pin[i], false);
-    }
+	  if ( g_button_state & 0x1EF ) // joysticks
+	  {
+		  g_lamp_state[0] = 0x7F;
+		  g_lamp_state[1] = 0x00;
+		  g_lamp_state[2] = 0x23;	
+	  }
+	  else
+	  {
+		  g_lamp_state[0] = 0x00;
+		  g_lamp_state[1] = 0x7F;
+		  g_lamp_state[2] = 0x23; 	  
+	  }
+	  
+	// left button
+	  g_lamp_state[6] = ( g_button_state & 0x10 ) ? 0xFF : 0x00;
+	
+	//right button
+	g_lamp_state[7] = ( g_button_state & 0x200 ) ? 0xFF : 0x00;
+	 	
   }
 }
 
@@ -196,6 +209,7 @@ int main(void) {
 		tud_task();
 		update_inputs();
 		send_hid();
+		update_lights_reactive();
 		update_lights();
 		sleep_us(1000);
 	}
