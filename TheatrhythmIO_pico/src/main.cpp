@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "hardware/pwm.h"
 #include "bsp/board.h"
 #include "pico/stdlib.h"
 #include "pinout.h"
@@ -102,20 +103,30 @@ void update_inputs() {
 	g_button_state = button_state;
 }
 
-//pwm_cycle 0-899
-//pwm_cycle < pwm[i]*pwm[i]
+uint32_t pwm_set_freq_duty(uint slice_num,
+       uint chan,uint32_t f, int d)
+{
+ uint32_t clock = 125000000;
+ uint32_t divider16 = clock / f / 4096 + 
+                           (clock % (f * 4096) != 0);
+ if (divider16 / 16 == 0)
+ divider16 = 16;
+ uint32_t wrap = clock * 16 / divider16 / f - 1;
+ pwm_set_clkdiv_int_frac(slice_num, divider16/16,
+                                     divider16 & 0xF);
+ pwm_set_wrap(slice_num, wrap);
+ pwm_set_chan_level(slice_num, chan, wrap * d / 100);
+ return wrap;
+}
+
 void update_lights(){
-	static uint16_t pwm_cycle = 0;
-	static uint64_t last_change[NUM_LIGHTS] = {0};
-	static uint8_t pwm[NUM_LIGHTS] = {0};
-	
-	pwm_cycle = (pwm_cycle + 1) % 900;
-	uint64_t curr_time = time_us_64(); 
 	for (int i=0; i<NUM_LIGHTS; i++)
 	{
-		double pwmval = (255 - g_lamp_state[i])*35./255.;
-		pwm[i] = pwmval;
-		gpio_put(g_led_pin[i], pwm_cycle < pwm[i]*pwm[i]);
+		uint slice_num = pwm_gpio_to_slice_num(g_led_pin[i]);
+		uint chan = pwm_gpio_to_channel(g_led_pin[i]);
+		uint duty = (255 - g_lamp_state[i])*100/255;
+		pwm_set_freq_duty(slice_num,chan, 60, duty);
+		pwm_set_enabled(slice_num, true);
 	}	
 }
 
@@ -157,8 +168,9 @@ void init() {
 	
 	  for (int i=0; i<NUM_LIGHTS; i++)
   {
-    gpio_init(g_led_pin[i]);
-    gpio_set_dir(g_led_pin[i], GPIO_OUT);
+    //gpio_init(g_led_pin[i]);
+    //gpio_set_dir(g_led_pin[i], GPIO_OUT);
+	gpio_set_function(g_led_pin[i], GPIO_FUNC_PWM);
   }
 
   for (int i=0; i<NUM_BUTTONS; i++)
@@ -185,7 +197,7 @@ int main(void) {
 		update_inputs();
 		send_hid();
 		update_lights();
-		//sleep_us(1000);
+		sleep_us(1000);
 	}
 	
 	return 0;

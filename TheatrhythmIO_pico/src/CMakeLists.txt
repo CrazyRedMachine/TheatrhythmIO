@@ -13,6 +13,8 @@ target_link_libraries(TheatrhythmIO PRIVATE
         pico_multicore
         pico_stdlib
         tinyusb_device
-        tinyusb_board)
+        tinyusb_board
+		hardware_gpio 
+		hardware_pwm)
 
 pico_add_extra_outputs(TheatrhythmIO)

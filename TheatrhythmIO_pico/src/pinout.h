@@ -43,25 +43,25 @@
 #define PIN_JOY_RGB_G    4
 #define PIN_JOY_RGB_B    5
 
-#define PIN_RFID_RGB_R   18
-#define PIN_RFID_RGB_G   19
-#define PIN_RFID_RGB_B   20
+#define PIN_RFID_RGB_R   0
+#define PIN_RFID_RGB_G   1
+#define PIN_RFID_RGB_B   2
 
 /* Left joy pins */ /* switch : dpad lb */
 #define PIN_LB_UP        6  /* dpad up */
 #define PIN_LB_DOWN      7 /* dpad down */
 #define PIN_LB_LEFT      8 /* dpad left */
 #define PIN_LB_RIGHT     9  /* dpad right */
-#define PIN_LB_BUTTON    14 /* L bumper */
-#define PIN_LB_LED       17
+#define PIN_LB_BUTTON    17 /* L bumper */
+#define PIN_LB_LED       14
 
 /* Right joy pins */ /* switch : xbya rb */
 #define PIN_RB_UP        10 /* X */
 #define PIN_RB_DOWN      11  /* B */
 #define PIN_RB_LEFT      12  /* Y */
 #define PIN_RB_RIGHT     13 /* A */
-#define PIN_RB_BUTTON    15 /* R bumper */
-#define PIN_RB_LED       16
+#define PIN_RB_BUTTON    16 /* R bumper */
+#define PIN_RB_LED       15
 
 /* Additional button pins */
 #define PIN_TEST         26  /* plus */
