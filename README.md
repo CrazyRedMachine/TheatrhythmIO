@@ -102,12 +102,12 @@ RGB leds are common anode.
 
 |Pin number|Wire color|Role|Arduino GPIO|
 |:---|---|---|---:|
-| 1 |Pink |RFID RGB Red - |5|
-|2|Brown |RFID RGB Green -|6|
-|3|Purple |RFID RGB Blue -|3|
-|4|White/Red |Joysticks RGB Red -|9|
-|5|White/Green |Joysticks RGB Green -|10|
-|6|White/Blue |Joysticks RGB Blue -|11|
+| 1 |Pink |Joysticks RGB Red - |5|
+|2|Brown |Joysticks RGB Green -|6|
+|3|Purple |Joysticks RGB Blue -|3|
+|4|White/Red |RFID RGB Red -|9|
+|5|White/Green |RFID RGB Green -|10|
+|6|White/Blue |RFID RGB Blue -|11|
 |7| |||
 |8|Black |GND|GND|
 |9|Red |+5V|+5V|
