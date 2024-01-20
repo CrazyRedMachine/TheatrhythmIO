@@ -64,8 +64,9 @@ void RGB_light(color_t color)
 
 void RGB_rfid_light(color_t color)
 {
-  analogWrite(PIN_RFID_RGB_R, INVERT color.red);
-  analogWrite(PIN_RFID_RGB_G, INVERT color.green);
+  //RFID blue is much dimmer than red and green, therefore i'm scaling them down to restore color balance
+  analogWrite(PIN_RFID_RGB_R, (INVERT color.red*0.2));
+  analogWrite(PIN_RFID_RGB_G, (INVERT color.green*0.2));
   analogWrite(PIN_RFID_RGB_B, INVERT color.blue);
 }
 #undef INVERT

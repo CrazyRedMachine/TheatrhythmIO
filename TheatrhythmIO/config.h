@@ -36,13 +36,13 @@
 /* PINS ASSIGNEMENT */
 
 /* RGB pins (/!\ MUST USE PWM PINS /!\) */
-#define PIN_JOY_RGB_R    9
-#define PIN_JOY_RGB_G    10
-#define PIN_JOY_RGB_B    11
+#define PIN_JOY_RGB_R    5
+#define PIN_JOY_RGB_G    6
+#define PIN_JOY_RGB_B    3
 
-#define PIN_RFID_RGB_R   5
-#define PIN_RFID_RGB_G   6
-#define PIN_RFID_RGB_B   3
+#define PIN_RFID_RGB_R   9
+#define PIN_RFID_RGB_G   10
+#define PIN_RFID_RGB_B   11
 
 /* Left joy pins */ /* switch : dpad lb */
 #define PIN_LB_UP        4  /* dpad up */
